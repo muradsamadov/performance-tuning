@@ -62,10 +62,10 @@ sar -u 1 3  --  CPU Usage of ALL CPUs; 1 saniyeden 1 ve 3 defe. \
 %iowait - diskde olan yuklenmeler bura aid edilir. hdd ni stress test etsek burada %iowait cpu faizinin qalxdigini gore bilerik.\
 %steal - eslinde VM ona ayrilan cpu hecminin tam hissesini istifade etmir. Misal ucun %steal-da 25% , %system-de 75% yaziblarsa demekki cpunun %25-i itkilere gedib\
 %idle - eger serverde %system 12% ve %idle 88% yuklenibse bu normaldir cunki cpunun 88% i sleep veziyyetindedir ve bu problemli bi sey deyil. Serverde normalda %idle \
-100%le isleyir eger serveri yukleyene nese yoxdursa. Bu serverde ola bilerki, hansisa performance meseleleri varki onuda sistem ozu edir server cox yuklu olmayanda.\
+100%le isleyir eger serveri yukleyene nese yoxdursa. Bu serverde ola bilerki, hansisa performance meseleleri varki onuda sistem ozu edir server cox yuklu olmayanda.
 
 sar -u  -- ise 1 gun erzinde 10 deq araliginda bize neticeni cixarir. Bu halda serverin evvelki veziyyetini monitorinq etmek olur  \
-sar -u -f /var/log/sa/sa10  --  bu komanda ile ise sirf ayin 10u ucun olan sar loguna baxirsan. ayin 10u sa10 seklinde gosterir ve belede davam edir. Misal ucun ayin \
+sar -u -f /var/log/sa/sa10  --  bu komanda ile ise sirf ayin 10u ucun olan sar loguna baxirsan. ayin 10u sa10 seklinde gosterir ve belede davam edir. Misal ucun ayin 
 5i ucun olan loga baxmaq ucun ise orada "sa5" kimi qeyd edirik: sar -u -f /var/log/sa/sa5. Burada son 10gunun logu var.
 
 2.
@@ -79,8 +79,8 @@ $ sar -P ALL
 12:40:01 AM       2      0.02      0.07      0.06      0.00      0.00     99.85
 12:40:01 AM       3      0.03      0.09      0.08      0.00      0.00     99.80
 ```
-sar -P ALL  --  her cpunu ayri-ayriliqda list edir.
-sar -P ALL 1  --  her 1 saniyaden bir reload edir.
+sar -P ALL  --  her cpunu ayri-ayriliqda list edir.\
+sar -P ALL 1  --  her 1 saniyaden bir reload edir.\
 sar -P ALL -f /var/log/sa/sa10  --  sirf ayin 10u ucun lazim olan datalari list edir.
 
 3.
@@ -94,12 +94,12 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 07:28:09 AM   6209248   2097432     25.25    189024   1796544    141372      0.85   1921060     88204
 Average:      6209248   2097432     25.25    189024   1796544    141372      0.85   1921060     88204
 ```
-sar -r 1 3  --  memory statistikasini report seklinde list edir.
-kbmemfree - hal-hazirda 6209248 KB free ram oldugunu gosterir.
-kbmemused - hal-hazirda 2097432 KB istifade olunan ramdir.
-%memused - hal-hazirda istifade olunan rami %-le gosterir.
-kbcached - hal-hazirda cache-de 1796544 KB ram oldugunu gosterir.
-kbcommit - cari is yuku hecminde lazim olan ram.
+sar -r 1 3  --  memory statistikasini report seklinde list edir.\
+kbmemfree - hal-hazirda 6209248 KB free ram oldugunu gosterir.\
+kbmemused - hal-hazirda 2097432 KB istifade olunan ramdir.\
+%memused - hal-hazirda istifade olunan rami %-le gosterir.\
+kbcached - hal-hazirda cache-de 1796544 KB ram oldugunu gosterir.\
+kbcommit - cari is yuku hecminde lazim olan ram.\
 %commit - cari is yuku hecminde lazim olan ram %-le.
 
 4.
@@ -113,9 +113,9 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 07:31:09 AM   8385920         0      0.00         0      0.00
 Average:      8385920         0      0.00         0      0.00
 ```
-sar -S 1 3  --  bu report swapdan statistikasini gosterir
-kbswpfree  - Amount of free swap space in kilobytes.
-kbswpused  - Amount of used swap space in kilobytes.
+sar -S 1 3  --  bu report swapdan statistikasini gosterir\
+kbswpfree  - Amount of free swap space in kilobytes.\
+kbswpused  - Amount of used swap space in kilobytes.\
 %swpused - Percentage of used swap space.
 
 5.
@@ -129,11 +129,11 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 01:56:31 PM    282.83     32.32    250.51    258.59   2537.37
 Average:       242.81    111.04    131.77    925.75   1369.90
 ```
-sar -b 1 3  --  Serverde ne qeder input/output transfer olur onu gormek olar. Misal ucun hal-hazirda serverde hecne islemirse buradaki olan tps,rtps ve s. 0 olaraq gorsenecekki buda serverin yuklu olmamasini gosterir.Misal ucun adice servere daxil olub hansisa direktoriyani deyisendeve fayl yaradanda demekki serverde xirdada olsa hansisa isler gorulur. Bu halda bele transfer rate faizi qalxir
-tps – Transactions per second (this includes both read and write)
-rtps – Read transactions per second
-wtps – Write transactions per second
-bread/s – Bytes read per second
+sar -b 1 3  --  Serverde ne qeder input/output transfer olur onu gormek olar. Misal ucun hal-hazirda serverde hecne islemirse buradaki olan tps,rtps ve s. 0 olaraq gorsenecekki buda serverin yuklu olmamasini gosterir.Misal ucun adice servere daxil olub hansisa direktoriyani deyisendeve fayl yaradanda demekki serverde xirdada olsa hansisa isler gorulur. Bu halda bele transfer rate faizi qalxir\
+tps – Transactions per second (this includes both read and write)\
+rtps – Read transactions per second\
+wtps – Write transactions per second\
+bread/s – Bytes read per second\
 bwrtn/s – Bytes written per second
 
 6.
@@ -163,9 +163,9 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 08:32:26 AM      4.00     61.39
 08:32:27 AM      2.00     57.00
 ```
-sar -w 1 3  --  1 saniye erzinde ne qeder proses ve context switch-in yuklenmesini gosterir.
-proc/s - 1 saniyede serverde ne qeder proses icra olundugunu gosterir. Yuxaridaki misalda 1 saniyede 3 prosesin icra olundugunu gorurur.
-cswch/s - context swithcing serverde olurki proses1 isleyir. Ardinca proses2 gelir ve CS proses1-i stop edir, proses2 bitenden sonra proses1-i qaldigi yerden start edir. Yeniki 1 sanoye erzinde serverde 53 proses gozlemede qalir demekdir.
+sar -w 1 3  --  1 saniye erzinde ne qeder proses ve context switch-in yuklenmesini gosterir.\
+proc/s - 1 saniyede serverde ne qeder proses icra olundugunu gosterir. Yuxaridaki misalda 1 saniyede 3 prosesin icra olundugunu gorurur.\
+cswch/s - context swithcing serverde olurki proses1 isleyir. Ardinca proses2 gelir ve CS proses1-i stop edir, proses2 bitenden sonra proses1-i qaldigi yerden start edir. Yeniki 1 saniye erzinde serverde 53 proses gozlemede qalir demekdir.
 
 8.
 ```
@@ -178,9 +178,9 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 06:28:56 AM         2       230      2.12      3.12      5.12         0
 Average:            3       230      3.12      3.12      5.12         0
 ```
-sar -q 1 3 -- This reports the run queue size and load average of last 1 minute, 5 minutes, and 15 minutes.
-runq-sz	- Run queue length (number of tasks waiting for run time).
-plist-sz - Number of tasks in the task list.
+sar -q 1 3 -- This reports the run queue size and load average of last 1 minute, 5 minutes, and 15 minutes.\
+runq-sz	- Run queue length (number of tasks waiting for run time).\
+plist-sz - Number of tasks in the task list.\
 ldavg-1 - System load average for the last minute. The load average is calculated as the average number of runnable or running tasks (R state), and the number of tasks in uninterruptible sleep (D state) over the specified interval.
 
 
