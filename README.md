@@ -16,9 +16,9 @@ si, so: Swap-ins and swap-outs. If these are non-zero, you’re out of memory.
 
 # iostat -xz 1  --  This is a great tool for understanding block devices (disks), both the workload applied and the resulting performance.
 ```
-r/s, w/s, rkB/s, wkB/s: These are the delivered reads, writes, read Kbytes, and write Kbytes per second to the device. Use these for workload characterization. A performance problem may simply be due to an excessive load applied.
-await: The average time for the I/O in milliseconds. This is the time that the application suffers, as it includes both time queued and time being serviced. Larger than expected average times can be an indicator of device saturation, or device problems.
-avgqu-sz: The average number of requests issued to the device. Values greater than 1 can be evidence of saturation (although devices can typically operate on requests in parallel, especially virtual devices which front multiple back-end disks.)
+r/s, w/s, rkB/s, wkB/s: These are the delivered reads, writes, read Kbytes, and write Kbytes per second to the device. Use these for workload characterization. A performance problem may simply be due to an excessive load applied.\
+await: The average time for the I/O in milliseconds. This is the time that the application suffers, as it includes both time queued and time being serviced. Larger than expected average times can be an indicator of device saturation, or device problems.\
+avgqu-sz: The average number of requests issued to the device. Values greater than 1 can be evidence of saturation (although devices can typically operate on requests in parallel, especially virtual devices which front multiple back-end disks.)\
 %util: Device utilization. This is really a busy percent, showing the time each second that the device was doing work. Values greater than 60% typically lead to poor performance (which should be seen in await), although it depends on the device. Values close to 100% usually indicate saturation.
 ```
 # sar -n DEV 1  --  Use this tool to check network interface throughput
@@ -55,16 +55,18 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 01:27:35 PM       all      0.75      0.00      0.25      0.00      0.00     99.00
 Average:          all      0.33      0.00      0.17      0.00      0.00     99.50
 ```
-sar -u 1 3  --  CPU Usage of ALL CPUs; 1 saniyeden 1 ve 3 defe. 
-%user - user level (application) terefinden olan yuklenmeleri bildirir. Misal ucun hansisa applicationda problem var demekki. 
-%nice - eger cpu ve nice ikiside yuklenibse demekki cpu-nu nese yukleyib, cpu yuklenib ve nice yuklenmeyibse yeni arada % ferqi coxdursa demekki nese normal deyil, ya cpu cox stress altinda isleyir ya da ki, hansisa yaranan yeni prosesler gozlemededir.
-%system - system level (kernel) terefinden yuklenmeler var. Daha cox hdd,ram,disk yuklenmeleri bura aid edilir.
-%iowait - diskde olan yuklenmeler bura aid edilir. hdd ni stress test etsek burada %iowait cpu faizinin qalxdigini gore bilerik.
-%steal - eslinde VM ona ayrilan cpu hecminin tam hissesini istifade etmir. Misal ucun %steal-da 25% , %system-de 75% yaziblarsa demekki cpunun %25-i itkilere gedib
-%idle - eger serverde %system 12% ve %idle 88% yuklenibse bu normaldir cunki cpunun 88% i sleep veziyyetindedir ve bu problemli bi sey deyil. Serverde normalda %idle 100%le isleyir eger serveri yukleyene nese yoxdursa. Bu serverde ola bilerki, hansisa performance meseleleri varki onuda sistem ozu edir server cox yuklu olmayanda.
+sar -u 1 3  --  CPU Usage of ALL CPUs; 1 saniyeden 1 ve 3 defe. \
+%user - user level (application) terefinden olan yuklenmeleri bildirir. Misal ucun hansisa applicationda problem var demekki. \
+%nice - eger cpu ve nice ikiside yuklenibse demekki cpu-nu nese yukleyib, cpu yuklenib ve nice yuklenmeyibse yeni arada % ferqi coxdursa demekki nese normal deyil, ya cpu cox stress altinda isleyir ya da ki, hansisa yaranan yeni prosesler gozlemededir.\
+%system - system level (kernel) terefinden yuklenmeler var. Daha cox hdd,ram,disk yuklenmeleri bura aid edilir.\
+%iowait - diskde olan yuklenmeler bura aid edilir. hdd ni stress test etsek burada %iowait cpu faizinin qalxdigini gore bilerik.\
+%steal - eslinde VM ona ayrilan cpu hecminin tam hissesini istifade etmir. Misal ucun %steal-da 25% , %system-de 75% yaziblarsa demekki cpunun %25-i itkilere gedib\
+%idle - eger serverde %system 12% ve %idle 88% yuklenibse bu normaldir cunki cpunun 88% i sleep veziyyetindedir ve bu problemli bi sey deyil. Serverde normalda %idle \
+100%le isleyir eger serveri yukleyene nese yoxdursa. Bu serverde ola bilerki, hansisa performance meseleleri varki onuda sistem ozu edir server cox yuklu olmayanda.\
 
-sar -u  -- ise 1 gun erzinde 10 deq araliginda bize neticeni cixarir. Bu halda serverin evvelki veziyyetini monitorinq etmek olur  
-sar -u -f /var/log/sa/sa10  --  bu komanda ile ise sirf ayin 10u ucun olan sar loguna baxirsan. ayin 10u sa10 seklinde gosterir ve belede davam edir. Misal ucun ayin 5i ucun olan loga baxmaq ucun ise orada "sa5" kimi qeyd edirik: sar -u -f /var/log/sa/sa5. Burada son 10gunun logu var.
+sar -u  -- ise 1 gun erzinde 10 deq araliginda bize neticeni cixarir. Bu halda serverin evvelki veziyyetini monitorinq etmek olur  \
+sar -u -f /var/log/sa/sa10  --  bu komanda ile ise sirf ayin 10u ucun olan sar loguna baxirsan. ayin 10u sa10 seklinde gosterir ve belede davam edir. Misal ucun ayin \
+5i ucun olan loga baxmaq ucun ise orada "sa5" kimi qeyd edirik: sar -u -f /var/log/sa/sa5. Burada son 10gunun logu var.
 
 2.
 ```
