@@ -9,7 +9,7 @@ https://github.com/iovisor/bcc/blob/master/docs/tutorial.md  --  bcc-tools-a aid
 ```
 # vmstat 1  --  It prints a summary of key server statistics on each line.
 ```
-r: Number of processes running on CPU and waiting for a turn.
+r: Number of processes running on CPU and waiting for a turn.\
 si, so: Swap-ins and swap-outs. If these are non-zero, you’re out of memory.
 ```
 # pidstat 1  --  Pidstat is a little like top’s per-process summary, but prints a rolling summary instead of clearing the screen. 
