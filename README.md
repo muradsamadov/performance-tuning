@@ -3,7 +3,7 @@ performance tuning basics
 
 # performance tools
 
-https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55  --  Linux Performance Analysis in 60,000 Milliseconds
+https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55  --  Linux Performance Analysis in 60,000 Milliseconds\
 https://github.com/iovisor/bcc/blob/master/docs/tutorial.md  --  bcc-tools-a aid lazim olan tool-lar haqqinda(esas sayt)
 
 ```
