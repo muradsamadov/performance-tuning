@@ -1,33 +1,33 @@
 # performance-tuning
 performance tuning basics
 
-#####performance tools#####
+# performance tools
 
 https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55  --  Linux Performance Analysis in 60,000 Milliseconds
 https://github.com/iovisor/bcc/blob/master/docs/tutorial.md  --  bcc-tools-a aid lazim olan tool-lar haqqinda(esas sayt)
 
-
+```
 # vmstat 1  --  It prints a summary of key server statistics on each line.
-
+```
 r: Number of processes running on CPU and waiting for a turn.
 si, so: Swap-ins and swap-outs. If these are non-zero, you’re out of memory.
-
+```
 # pidstat 1  --  Pidstat is a little like top’s per-process summary, but prints a rolling summary instead of clearing the screen. 
 
 # iostat -xz 1  --  This is a great tool for understanding block devices (disks), both the workload applied and the resulting performance.
-
+```
 r/s, w/s, rkB/s, wkB/s: These are the delivered reads, writes, read Kbytes, and write Kbytes per second to the device. Use these for workload characterization. A performance problem may simply be due to an excessive load applied.
 await: The average time for the I/O in milliseconds. This is the time that the application suffers, as it includes both time queued and time being serviced. Larger than expected average times can be an indicator of device saturation, or device problems.
 avgqu-sz: The average number of requests issued to the device. Values greater than 1 can be evidence of saturation (although devices can typically operate on requests in parallel, especially virtual devices which front multiple back-end disks.)
 %util: Device utilization. This is really a busy percent, showing the time each second that the device was doing work. Values greater than 60% typically lead to poor performance (which should be seen in await), although it depends on the device. Values close to 100% usually indicate saturation.
-
+```
 # sar -n DEV 1  --  Use this tool to check network interface throughput
 
 # sar -n TCP,ETCP 1
+```
 
-
-#####bcc-tools#####
-
+# bcc-tools
+```
 # ./execsnoop  --  cari vaxtda kim sessiyada hansi komandani icra edirse onlari list edir
 # ./opensnoop  --  cari vaxtda hansi fayllar istifade olunursa onlari list edir. Misal ucun hal-hazirda nginx.conf faylinda nese nediyisiklikler edirem ve bura dusurki men vim komandasi vasitesile nginx.conf-da edir edirem
 # ./xfsslower  --  xfs fayl sisteminin yuklenib-yuklenmemesini gosterir. Meselen hal-hazirda men hdd stress-test qoysam list seklinde gosterecekki bu komanda bu fayla yazir
@@ -37,50 +37,15 @@ avgqu-sz: The average number of requests issued to the device. Values greater th
 # ./tcpconnect  --  hal-hazirki serverden hansi serverlere hansi portuna connect olursansa onlari list edir
 # ./tcpaccept  --  remote serverden local servere gelen port accessleri list edir
 # ./runqlat  --  This program summarizes scheduler run queue latency as a histogram, showing how long tasks spent waiting their turn to run on-CPU.
+```
 
 
 
-
-Lenovo Ideapad L3
-Product Code: 81y300pqrk
-
-
-java -version
-java version "1.8.0_211"
-Java(TM) SE Runtime Environment (build 1.8.0_211-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)
-
-
- hostnamectl
-   Static hostname: xalq-fcubs-uat2-app
-         Icon name: computer-vm
-           Chassis: vm
-        Machine ID: fd3a8047afaa4d1b9737f059f1a43af3
-           Boot ID: f08de713804c499e9dc770a16ee9dc18
-    Virtualization: vmware
-  Operating System: Oracle Linux Server 7.7
-       CPE OS Name: cpe:/o:oracle:linux:7:7:server
-            Kernel: Linux 4.1.12-124.34.1.el7uek.x86_64
-      Architecture: x86-64
-
-
- df -hT
-Filesystem                         Type      Size  Used Avail Use% Mounted on
-devtmpfs                           devtmpfs  3.9G     0  3.9G   0% /dev
-tmpfs                              tmpfs     3.9G     0  3.9G   0% /dev/shm
-tmpfs                              tmpfs     3.9G  410M  3.5G  11% /run
-tmpfs                              tmpfs     3.9G     0  3.9G   0% /sys/fs/cgroup
-/dev/mapper/centos_xalq--vds1-root xfs        50G   44G  6.7G  87% /
-tmpfs                              tmpfs     3.9G  5.2M  3.9G   1% /tmp
-/dev/sda1                          xfs      1014M  193M  822M  19% /boot
-/dev/mapper/centos_xalq--vds1-home xfs        92G   39G   53G  43% /home
-tmpfs                              tmpfs     795M     0  795M   0% /run/user/1000
-
-
-###SAR##########################################################
+# SAR
 https://www.computerhope.com/unix/usar.htm 
 
 1.
+```
 $ sar -u 1 3
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -89,7 +54,7 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 01:27:34 PM       all      0.25      0.00      0.25      0.00      0.00     99.50
 01:27:35 PM       all      0.75      0.00      0.25      0.00      0.00     99.00
 Average:          all      0.33      0.00      0.17      0.00      0.00     99.50
-
+```
 sar -u 1 3  --  CPU Usage of ALL CPUs; 1 saniyeden 1 ve 3 defe. 
 %user - user level (application) terefinden olan yuklenmeleri bildirir. Misal ucun hansisa applicationda problem var demekki. 
 %nice - eger cpu ve nice ikiside yuklenibse demekki cpu-nu nese yukleyib, cpu yuklenib ve nice yuklenmeyibse yeni arada % ferqi coxdursa demekki nese normal deyil, ya cpu cox stress altinda isleyir ya da ki, hansisa yaranan yeni prosesler gozlemededir.
@@ -102,6 +67,7 @@ sar -u  -- ise 1 gun erzinde 10 deq araliginda bize neticeni cixarir. Bu halda s
 sar -u -f /var/log/sa/sa10  --  bu komanda ile ise sirf ayin 10u ucun olan sar loguna baxirsan. ayin 10u sa10 seklinde gosterir ve belede davam edir. Misal ucun ayin 5i ucun olan loga baxmaq ucun ise orada "sa5" kimi qeyd edirik: sar -u -f /var/log/sa/sa5. Burada son 10gunun logu var.
 
 2.
+```
 $ sar -P ALL
 
 12:30:01 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
@@ -110,12 +76,13 @@ $ sar -P ALL
 12:40:01 AM       1      0.05      0.03      0.06      0.00      0.00     99.85
 12:40:01 AM       2      0.02      0.07      0.06      0.00      0.00     99.85
 12:40:01 AM       3      0.03      0.09      0.08      0.00      0.00     99.80
-
+```
 sar -P ALL  --  her cpunu ayri-ayriliqda list edir.
 sar -P ALL 1  --  her 1 saniyaden bir reload edir.
 sar -P ALL -f /var/log/sa/sa10  --  sirf ayin 10u ucun lazim olan datalari list edir.
 
 3.
+```
 $ sar -r 1 3
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -124,7 +91,7 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 07:28:08 AM   6209248   2097432     25.25    189024   1796544    141372      0.85   1921060     88204
 07:28:09 AM   6209248   2097432     25.25    189024   1796544    141372      0.85   1921060     88204
 Average:      6209248   2097432     25.25    189024   1796544    141372      0.85   1921060     88204
-
+```
 sar -r 1 3  --  memory statistikasini report seklinde list edir.
 kbmemfree - hal-hazirda 6209248 KB free ram oldugunu gosterir.
 kbmemused - hal-hazirda 2097432 KB istifade olunan ramdir.
@@ -134,6 +101,7 @@ kbcommit - cari is yuku hecminde lazim olan ram.
 %commit - cari is yuku hecminde lazim olan ram %-le.
 
 4.
+```
 $ sar -S 1 3
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -142,13 +110,14 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 07:31:08 AM   8385920         0      0.00         0      0.00
 07:31:09 AM   8385920         0      0.00         0      0.00
 Average:      8385920         0      0.00         0      0.00
-
+```
 sar -S 1 3  --  bu report swapdan statistikasini gosterir
 kbswpfree  - Amount of free swap space in kilobytes.
 kbswpused  - Amount of used swap space in kilobytes.
 %swpused - Percentage of used swap space.
 
 5.
+```
 $ sar -b 1 3  --  bu misalda gorsenirki serverde hal-hazirda rate var, bu hansisa servis ola bilerki burda calisir ve s. Tam olaraq bu o demekdir ki, serverde hal-hazirda nese calisir ve server bos deyil
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -157,7 +126,7 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 01:56:30 PM    100.00     36.00     64.00    304.00    816.00
 01:56:31 PM    282.83     32.32    250.51    258.59   2537.37
 Average:       242.81    111.04    131.77    925.75   1369.90
-
+```
 sar -b 1 3  --  Serverde ne qeder input/output transfer olur onu gormek olar. Misal ucun hal-hazirda serverde hecne islemirse buradaki olan tps,rtps ve s. 0 olaraq gorsenecekki buda serverin yuklu olmamasini gosterir.Misal ucun adice servere daxil olub hansisa direktoriyani deyisendeve fayl yaradanda demekki serverde xirdada olsa hansisa isler gorulur. Bu halda bele transfer rate faizi qalxir
 tps – Transactions per second (this includes both read and write)
 rtps – Read transactions per second
@@ -166,6 +135,7 @@ bread/s – Bytes read per second
 bwrtn/s – Bytes written per second
 
 6.
+```
 $ sar -p -d 1 1
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -178,10 +148,11 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 01:59:46 PM      sdf1      8.08      0.00    105.05     13.00      0.00      0.38      0.38      0.30
 01:59:46 PM      sda2      1.01      8.08      0.00      8.00      0.01      9.00      9.00      0.91
 01:59:46 PM      sdb2      1.01      8.08      0.00      8.00      0.01      9.00      9.00      0.91
-
+```
 sar -p -d 1 1  --  diskin hal-hazirda ne qeder yuklu oldugunu gosterir. Yuxarida da gorunduyu kimi disklerin hamisinin bir-bir outputunu verirki misalcun sdb1 diski bu qeder yuklenib.
 
 7.
+```
 $ sar -w 1 3
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -189,12 +160,13 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 08:32:25 AM      3.00     53.00
 08:32:26 AM      4.00     61.39
 08:32:27 AM      2.00     57.00
-
+```
 sar -w 1 3  --  1 saniye erzinde ne qeder proses ve context switch-in yuklenmesini gosterir.
 proc/s - 1 saniyede serverde ne qeder proses icra olundugunu gosterir. Yuxaridaki misalda 1 saniyede 3 prosesin icra olundugunu gorurur.
 cswch/s - context swithcing serverde olurki proses1 isleyir. Ardinca proses2 gelir ve CS proses1-i stop edir, proses2 bitenden sonra proses1-i qaldigi yerden start edir. Yeniki 1 sanoye erzinde serverde 53 proses gozlemede qalir demekdir.
 
 8.
+```
 $ sar -q 1 3
 Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 
@@ -203,7 +175,7 @@ Linux 2.6.18-194.el5PAE (dev-db)        03/26/2011      _i686_  (8 CPU)
 06:28:55 AM         2       210      2.01      3.15      5.15         0
 06:28:56 AM         2       230      2.12      3.12      5.12         0
 Average:            3       230      3.12      3.12      5.12         0
-
+```
 sar -q 1 3 -- This reports the run queue size and load average of last 1 minute, 5 minutes, and 15 minutes.
 runq-sz	- Run queue length (number of tasks waiting for run time).
 plist-sz - Number of tasks in the task list.
