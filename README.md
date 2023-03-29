@@ -13,6 +13,7 @@ r: Number of processes running on CPU and waiting for a turn.\
 si, so: Swap-ins and swap-outs. If these are non-zero, you’re out of memory.
 ```
 # pidstat 1  --  Pidstat is a little like top’s per-process summary, but prints a rolling summary instead of clearing the screen. 
+# pidstat -p PID_NUMBER 1  --  pidstat show only PID_NUMBER processess during 1 second interval
 
 # iostat -xz 1  --  This is a great tool for understanding block devices (disks), both the workload applied and the resulting performance.
 ```
